@@ -1,0 +1,14 @@
+schedule: "0 7 * * *"  # 7AM every day, on the first run we might need like 3-4days intereval tho
+image:
+  repository: tbd.azurecr.io/rsync-ubuntu
+nodeSelector:
+  kubernetes.azure.com/agentpool: default
+
+storageAccounts:
+  src: stdvopreu202
+  dst: sttdocmaincu201
+
+srcShare: prod-pvc-shared
+dstShare: prod-pvc-shared
+
+webhook: # to be determined

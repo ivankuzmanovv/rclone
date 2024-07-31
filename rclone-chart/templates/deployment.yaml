@@ -1,0 +1,42 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: rclone
+spec:
+  schedule: "{{ .Values.schedule }}"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: rclone
+        spec:
+          restartPolicy: Never
+          nodeSelector:
+            {{- toYaml .Values.nodeSelector | nindent 12 }}
+          containers:
+            - name: rsync-ubuntu
+              image: "{{ .Values.image.repository }}"
+              securityContext:
+                runAsUser: 0
+              env:
+                - name: NFS_SOURCE
+                  value: "/{{ .Values.storageAccounts.src }}/{{ .Values.srcShare }}"
+                - name: NFS_DEST
+                  value: "/{{ .Values.storageAccounts.dst }}/{{ .Values.dstShare }}"
+                - name: WEBHOOK_URL
+                  value: "{{ .Values.webhook }}"
+              volumeMounts:
+                - name: nfs
+                  mountPath: "/mount/{{ .Values.storageAccounts.src }}/{{ .Values.srcShare }}"
+                - name: nfs2
+                  mountPath: "/mount/{{ .Values.storageAccounts.dst }}/{{ .Values.dstShare }}"
+          volumes:
+            - name: nfs
+              nfs:
+                server: "{{ .Values.storageAccounts.src }}.file.core.windows.net"
+                path: "/{{ .Values.storageAccounts.src }}/{{ .Values.srcShare }}"
+            - name: nfs2
+              nfs:
+                server: "{{ .Values.storageAccounts.dst }}.file.core.windows.net"
+                path: "/{{ .Values.storageAccounts.dst }}/{{ .Values.dstShare }}"

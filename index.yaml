@@ -1,0 +1,13 @@
+apiVersion: v1
+entries:
+  rclone:
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2024-07-31T11:31:08.558097836+03:00"
+    description: A Helm chart for deploying an rclone CronJob
+    digest: 4af9f9537c8129f6cd206ad335620364dce2621d95111ed8328916a63ba40aeb
+    name: rclone
+    urls:
+    - https://ivankuzmanovv.github.io/rclone/rclone-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-07-31T11:31:08.557893188+03:00"
