@@ -5,10 +5,10 @@ nodeSelector:
   kubernetes.azure.com/agentpool: default
 
 storageAccounts:
-  src: sttdocmainpreu201
-  dst: sttdocmainllvcu01
+  src: test
+  dst: test
 
 srcShare: test
 dstShare: test1
 
-webhook: "https://prod-225.westeurope.logic.azure.com:443/workflows/bd285fd712414408a2b0bf0fff581c77/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=gvg9gCxdmPiGoh1kqLq9fO_MfWSbjCgIbq97SclCdl4"
+webhook: ""
